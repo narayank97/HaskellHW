@@ -21,7 +21,7 @@ myreverse l = _myreverse l []
         _myreverse [] l = l
         _myreverse (x:xs) l = _myreverse xs (x:l) 
         
-
+replace ::(Eq a) => a -> a -> [a] -> [a]  
 replace a b []=[]
 replace a b (myhead:mytail) |b == myhead = a:replace a b mytail
                             |otherwise = myhead:replace a b mytail
