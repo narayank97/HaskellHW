@@ -13,4 +13,16 @@ mylast::(Eq mylist)=>[mylist]->[mylist]
 mylast []=[]
 mylast (myhead:mytail) |null mytail = myhead:mylast mytail
                        |otherwise = mylast mytail --works but the [] or "" doesn't
+                       
+myreverse :: [a] -> [a]
+myreverse l = _myreverse l []
+    where
+        _myreverse :: [a] -> [a] -> [a]
+        _myreverse [] l = l
+        _myreverse (x:xs) l = _myreverse xs (x:l) 
+        
+
+replace a b []=[]
+replace a b (myhead:mytail) |b == myhead = a:replace a b mytail
+                            |otherwise = myhead:replace a b mytail
 
