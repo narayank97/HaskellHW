@@ -26,21 +26,49 @@
 -- replace a b (myhead:mytail) |b == myhead = a:replace a b mytail
 --                             |otherwise = myhead:replace a b mytail
 
+-- myremoveduplicates_pm::(Eq mylist)=>[mylist]->[mylist]
+-- myremoveduplicates_pm []= []
+-- myremoveduplicates_pm [x] = [x]
+-- myremoveduplicates_pm(myhead:mytail) | myhead `elem` mytail = myremoveduplicates_pm mytail
+--                             |otherwise = myhead : myremoveduplicates_pm mytail
+                            
+-- myintersection_pm::(Eq mylist)=>[mylist]->[mylist]->[mylist]
+-- myintersection_pm[] list2= []
+-- myintersection_pm(myhead:mytail) list2 | myhead `elem` list2 = myhead:myintersection_pm mytail list2
+--                             |otherwise = myintersection_pm mytail list2
+                            
+-- mylast_pm::(Eq mylist)=>[mylist]->[mylist]
+-- mylast_pm []=[]
+-- mylast_pm (myhead:mytail) |null mytail = myhead:mylast_pm mytail
+--                        |otherwise = mylast_pm mytail --works but the [] or "" doesn't
+                       
+-- myreverse_pm :: [a] -> [a]
+-- myreverse_pm l = _myreverse_pm l []
+--     where
+--         _myreverse_pm :: [a] -> [a] -> [a]
+--         _myreverse_pm [] l = l
+--         _myreverse_pm (x:xs) l = _myreverse_pm xs (x:l) 
+        
+-- myreplaceall_pm ::(Eq a) => a -> a -> [a] -> [a]  
+-- myreplaceall_pm a b []=[]
+-- myreplaceall_pm a b (myhead:mytail) |b == myhead = a:myreplaceall_pm a b mytail
+--                             |otherwise = myhead:myreplaceall_pm a b mytail
+
 myremoveduplicates_pm::(Eq mylist)=>[mylist]->[mylist]
 myremoveduplicates_pm []= []
 myremoveduplicates_pm [x] = [x]
-myremoveduplicates_pm(myhead:mytail) | myhead `elem` mytail = myremoveduplicates_pm mytail
-                            |otherwise = myhead : myremoveduplicates_pm mytail
+myremoveduplicates_pm(x:xs) | x `elem` xs = myremoveduplicates_pm xs
+                            |otherwise = x : myremoveduplicates_pm xs
                             
 myintersection_pm::(Eq mylist)=>[mylist]->[mylist]->[mylist]
 myintersection_pm[] list2= []
-myintersection_pm(myhead:mytail) list2 | myhead `elem` list2 = myhead:myintersection_pm mytail list2
-                            |otherwise = myintersection_pm mytail list2
+myintersection_pm(x:xs) list2 | x `elem` list2 = x:myintersection_pm xs list2
+                            |otherwise = myintersection_pm xs list2
                             
 mylast_pm::(Eq mylist)=>[mylist]->[mylist]
 mylast_pm []=[]
-mylast_pm (myhead:mytail) |null mytail = myhead:mylast_pm mytail
-                       |otherwise = mylast_pm mytail --works but the [] or "" doesn't
+mylast_pm (x:xs) |null xs = x:mylast_pm xs
+                       |otherwise = mylast_pm xs --works but the [] or "" doesn't
                        
 myreverse_pm :: [a] -> [a]
 myreverse_pm l = _myreverse_pm l []
@@ -51,6 +79,6 @@ myreverse_pm l = _myreverse_pm l []
         
 myreplaceall_pm ::(Eq a) => a -> a -> [a] -> [a]  
 myreplaceall_pm a b []=[]
-myreplaceall_pm a b (myhead:mytail) |b == myhead = a:myreplaceall_pm a b mytail
-                            |otherwise = myhead:myreplaceall_pm a b mytail
+myreplaceall_pm a b (x:xs) |b == x = a:myreplaceall_pm a b xs
+                            |otherwise = x:myreplaceall_pm a b xs
 
