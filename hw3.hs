@@ -54,6 +54,11 @@
 -- myreplaceall_pm a b (myhead:mytail) |b == myhead = a:myreplaceall_pm a b mytail
 --                             |otherwise = myhead:myreplaceall_pm a b mytail
 
+myremoveduplicates mylist
+  |null mylist = []
+  |(head mylist) `elem` (tail mylist) = myremoveduplicates (tail mylist) 
+  |otherwise = (head mylist):myremoveduplicates (tail mylist)
+
 myremoveduplicates_pm::(Eq mylist)=>[mylist]->[mylist]
 myremoveduplicates_pm []= []
 myremoveduplicates_pm [x] = [x]
