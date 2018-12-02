@@ -85,6 +85,14 @@ mylast_pm::(Eq mylist)=>[mylist]->[mylist]
 mylast_pm []=[]
 mylast_pm (x:xs) |null xs = x:mylast_pm xs
                        |otherwise = mylast_pm xs --works but the [] or "" doesn't
+                      
+myreverse l
+  | null l = []
+  | otherwise = _myreverse l []
+    where 
+    _myreverse l1 l2
+      |null l1 = l2
+      |otherwise = _myreverse (tail l1) ((head l1):l2)
                        
 myreverse_pm :: [a] -> [a]
 myreverse_pm l = _myreverse_pm l []
