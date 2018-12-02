@@ -64,12 +64,23 @@ myremoveduplicates_pm []= []
 myremoveduplicates_pm [x] = [x]
 myremoveduplicates_pm(x:xs) | x `elem` xs = myremoveduplicates_pm xs
                             |otherwise = x : myremoveduplicates_pm xs
-                            
+
+myintersection list1 list2
+  | null list2 = []
+  | null list1 = []
+  | (head list1) `elem` list2 = (head list1):myintersection (tail list1) list2
+  | otherwise = myintersection (tail list1) list2
+
 myintersection_pm::(Eq mylist)=>[mylist]->[mylist]->[mylist]
 myintersection_pm[] list2= []
 myintersection_pm(x:xs) list2 | x `elem` list2 = x:myintersection_pm xs list2
                             |otherwise = myintersection_pm xs list2
-                            
+
+mylast mylist
+  |null mylist = []
+  |null (tail mylist) = (head mylist):mylast (tail mylist)
+  |otherwise = mylast (tail mylist)
+
 mylast_pm::(Eq mylist)=>[mylist]->[mylist]
 mylast_pm []=[]
 mylast_pm (x:xs) |null xs = x:mylast_pm xs
@@ -81,6 +92,11 @@ myreverse_pm l = _myreverse_pm l []
         _myreverse_pm :: [a] -> [a] -> [a]
         _myreverse_pm [] l = l
         _myreverse_pm (x:xs) l = _myreverse_pm xs (x:l) 
+        
+myreplaceall a b mylist
+  |null mylist = []
+  |b == (head mylist) = a:myreplaceall a b (tail mylist)
+  |otherwise = (head mylist):myreplaceall a b (tail mylist)
         
 myreplaceall_pm ::(Eq a) => a -> a -> [a] -> [a]  
 myreplaceall_pm a b []=[]
