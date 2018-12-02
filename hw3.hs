@@ -110,4 +110,18 @@ myreplaceall_pm ::(Eq a) => a -> a -> [a] -> [a]
 myreplaceall_pm a b []=[]
 myreplaceall_pm a b (x:xs) |b == x = a:myreplaceall_pm a b xs
                             |otherwise = x:myreplaceall_pm a b xs
+                            
+main = do
+  print(myremoveduplicates "abaaabbbababbab")
+  print(myremoveduplicates_pm "abaaabbbababbab")
+  print(myintersection [1,2,3] [1,2,3])
+  print(myintersection_pm [1,2,3] [1,2,3])
+  print(mylast [1,2,3,4])
+  print(mylast_pm [1,2,3,4])
+  print(myreverse "abc")
+  print(myreverse_pm "abc")
+  print(myreplaceall 'a' 'x' "xbxbxbxbxbxb")
+  print(myreplaceall 'a' 'x' "xbxbxbxbxbxb")                            
+                            
+
 
